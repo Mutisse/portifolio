@@ -205,7 +205,7 @@ span {
   border-color: var(--main-calor);
   transform: scale(1.02);
 }
-.about-content ul li{
+.about-content ul li {
   font-size: 1.7rem; /* Aumenta o tamanho da fonte */
   line-height: 1.8;
 }
@@ -480,4 +480,21 @@ span {
   .contact form .input-box .input-box {
     width: 100%;
   }
+}
+
+#cv-download {
+  position: relative;
+}
+
+#cv-download:hover::after {
+  content: "Tamanho: XX MB";
+  position: absolute;
+  background: #333;
+  color: white;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 14px;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
 }
