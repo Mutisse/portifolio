@@ -36,9 +36,7 @@ section {
   width: 100%;
   padding: 2rem 9%;
   background: rgba(25, 31, 54, 0.9);
-  /* Add both standard and prefixed versions */
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -83,7 +81,7 @@ section {
 }
 
 .navbar a::after {
-  content: "";
+  content: '';
   position: absolute;
   width: 0;
   height: 2px;
@@ -105,6 +103,8 @@ section {
   display: none;
   transition: transform 0.3s ease;
   z-index: 1001;
+  background: transparent;
+  border: none;
 }
 
 #menu-icon.fa-x {
@@ -119,9 +119,7 @@ section {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  /* Add both standard and prefixed versions */
   backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
   z-index: 998;
   opacity: 0;
   visibility: hidden;
@@ -135,6 +133,10 @@ section {
 
 /* =============== MEDIA QUERIES PARA NAVBAR MOBILE =============== */
 @media (max-width: 768px) {
+  #menu-icon {
+    display: block;
+  }
+
   .navbar {
     position: fixed;
     top: 0;
@@ -143,9 +145,7 @@ section {
     max-width: 300px;
     height: 100vh;
     background: rgba(25, 31, 54, 0.98);
-    /* Add both standard and prefixed versions */
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -251,8 +251,7 @@ span {
 }
 
 @keyframes floatImage {
-  0%,
-  100% {
+  0%, 100% {
     transform: translateY(0);
   }
   50% {
@@ -313,18 +312,13 @@ span {
 }
 
 .btn::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transition: 0.5s;
 }
 
@@ -493,7 +487,7 @@ span {
 }
 
 .services-box ul li::before {
-  content: "▹";
+  content: '▹';
   color: #59b2f4;
   position: absolute;
   left: -1.5rem;
@@ -668,7 +662,7 @@ span {
   margin-bottom: 0.5rem;
 }
 
-.contact-item a,
+.contact-item a, 
 .contact-item p {
   font-size: 1.5rem;
   color: #fff;
@@ -877,7 +871,7 @@ span {
   html {
     font-size: 55%;
   }
-
+  
   .home-img img {
     width: 35vw;
   }
@@ -887,64 +881,33 @@ span {
   .header {
     padding: 2rem 3%;
   }
-
+  
   section {
     padding: 10rem 3% 2rem;
   }
-
+  
   .services {
     padding: 7rem;
   }
-
+  
   .portfolio {
     padding-bottom: 7rem;
   }
-
+  
   .contact {
     min-height: auto;
   }
-
+  
   .footer {
     padding: 2rem 3%;
   }
-
+  
   .home-img img {
     width: 40vw;
   }
 }
 
 @media (max-width: 768px) {
-  #menu-icon {
-    display: block;
-  }
-
-  .navbar {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    padding: 1rem 3%;
-    background: rgba(25, 31, 54, 0.98);
-    backdrop-filter: blur(10px);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: left 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
-    z-index: 999;
-  }
-
-  .navbar.active {
-    left: 0;
-  }
-
-  .navbar a {
-    display: block;
-    font-size: 2rem;
-    margin: 1.5rem 0;
-    padding: 1rem 2rem;
-  }
-
   .home {
     flex-direction: column;
   }
@@ -1037,8 +1000,7 @@ span {
 }
 
 @keyframes blink {
-  0%,
-  100% {
+  0%, 100% {
     opacity: 1;
   }
   50% {
@@ -1066,7 +1028,7 @@ span {
 }
 
 #cv-download:hover::before {
-  content: "";
+  content: '';
   position: absolute;
   bottom: calc(100% - 5px);
   left: 50%;
