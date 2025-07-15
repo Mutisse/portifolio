@@ -1,0 +1,21 @@
+{
+  "name": "Portfólio Edilson Mutisse",
+  "short_name": "Portfólio",
+  "description": "Portfólio profissional de Edilson Mutisse, Desenvolvedor Full-stack",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#191f36",
+  "theme_color": "#59b2f4",
+  "icons": [
+    {
+      "src": "icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
