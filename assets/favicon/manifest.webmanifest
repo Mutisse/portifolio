@@ -1,19 +1,19 @@
 {
-  "name": "Portfólio Edilson Mutisse",
-  "short_name": "Portfólio",
+  "name": "Edilson Mutisse - Portfolio",
+  "short_name": "Portfolio",
+  "description": "Edilson Mutisse - Desenvolvedor Full-stack Moçambicano. Especialista em desenvolvimento web, aplicativos mobile e sistemas backend. Crio soluções personalizadas em JavaScript, Vue.js, React Native, Node.js e PHP Laravel para impulsionar negócios digitais.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#0d6efd",
-  "description": "Portfólio profissional de Edilson Mutisse",
+  "theme_color": "#147efb",
   "icons": [
     {
-      "src": "/assets/favicon/icon-192x192.png",
+      "src": "assets/favicon/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/assets/favicon/icon-512x512.png",
+      "src": "assets/favicon/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
