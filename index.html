@@ -29,10 +29,41 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     /></noscript>
 
+    <!-- SweetAlert2 CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
+
     <!-- Favicon moderno -->
     <link rel="manifest" href="assets/favicon/manifest.webmanifest" />
     <link rel="icon" href="assets/favicon/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" />
+
+    <!-- Favicons alternativos para resolver 404 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="assets/favicon/icon-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="assets/favicon/icon-512x512.png"
+    />
+    <link
+      rel="shortcut icon"
+      href="assets/favicon/icon.svg"
+      type="image/svg+xml"
+    />
+
+    <!-- Fallback caso os PNGs não existam -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>"
+    />
 
     <!-- CSS -->
     <link rel="stylesheet" href="./src/style/styles.css" />
@@ -95,12 +126,12 @@
             <i class="fa-brands fa-github"></i>
           </a>
           <a
-            href="https://t.me/edilsonmutisse"
+            href="https://wa.me/25878612744"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Telegram"
+            aria-label="WhatsApp"
           >
-            <i class="fa-brands fa-telegram"></i>
+            <i class="fa-brands fa-whatsapp"></i>
           </a>
           <a
             href="https://linkedin.com/in/seu-linkedin"
@@ -133,7 +164,6 @@
         <img
           src="./assets/img/profiledp.png"
           alt="Edilson Mutisse - Desenvolvedor Full-stack"
-          loading="lazy"
         />
       </div>
     </section>
@@ -144,7 +174,6 @@
         <img
           src="./assets/img/profilepic.png"
           alt="Perfil profissional de Edilson Mutisse"
-          loading="lazy"
         />
       </div>
       <div class="about-content">
@@ -260,11 +289,7 @@
       <div class="portfolio-container">
         <!-- Projeto 1 - KLC Market -->
         <div class="portfolio-box">
-          <img
-            src="./assets/img/img5.png"
-            alt="KLC Market - E-commerce"
-            loading="lazy"
-          />
+          <img src="./assets/img/img5.png" alt="KLC Market - E-commerce" />
           <div class="portfolio-layer">
             <h4>KLC Market</h4>
             <p>Plataforma de e-commerce completa desenvolvida com:</p>
@@ -296,11 +321,7 @@
 
         <!-- Projeto 2 - SmartWater -->
         <div class="portfolio-box">
-          <img
-            src="./assets/img/img2.png"
-            alt="SmartWater - Gestão de Água"
-            loading="lazy"
-          />
+          <img src="./assets/img/img2.png" alt="SmartWater - Gestão de Água" />
           <div class="portfolio-layer">
             <h4>SmartWater</h4>
             <p>Plataforma de gestão hídrica com:</p>
@@ -326,11 +347,7 @@
 
         <!-- Projeto 3 - BeautyTime -->
         <div class="portfolio-box">
-          <img
-            src="./assets/img/img3.png"
-            alt="BeautyTime - Agendamento"
-            loading="lazy"
-          />
+          <img src="./assets/img/img3.png" alt="BeautyTime - Agendamento" />
           <div class="portfolio-layer">
             <h4>BeautyTime</h4>
             <p>Sistema completo para salões de beleza com:</p>
@@ -362,11 +379,7 @@
 
         <!-- Projeto 4 - Gestão Escolar -->
         <div class="portfolio-box">
-          <img
-            src="./assets/img/img6.png"
-            alt="Gestão Escolar"
-            loading="lazy"
-          />
+          <img src="./assets/img/img6.png" alt="Gestão Escolar" />
           <div class="portfolio-layer">
             <h4>Gestão Escolar</h4>
             <p>Sistema completo para instituições de ensino com:</p>
@@ -393,11 +406,7 @@
 
         <!-- Projeto 5 - APIs e Backend -->
         <div class="portfolio-box">
-          <img
-            src="./assets/img/img1.png"
-            alt="APIs e Backend"
-            loading="lazy"
-          />
+          <img src="./assets/img/img1.png" alt="APIs e Backend" />
           <div class="portfolio-layer">
             <h4>APIs e Microserviços</h4>
             <p>Arquitetura de backend escalável com:</p>
@@ -424,11 +433,7 @@
 
         <!-- Projeto 6 - Quantum Marketing -->
         <div class="portfolio-box">
-          <img
-            src="./assets/img/img4.png"
-            alt="Quantum - Marketing Digital"
-            loading="lazy"
-          />
+          <img src="./assets/img/img4.png" alt="Quantum - Marketing Digital" />
           <div class="portfolio-layer">
             <h4>Quantum Marketing</h4>
             <p>Plataforma de marketing digital com resultados comprovados:</p>
@@ -471,6 +476,7 @@
         </a>
       </div>
     </section>
+
     <!-- Contact Section -->
     <section class="contact" id="contact">
       <h2 class="heading">Vamos <span>conversar</span></h2>
@@ -528,45 +534,24 @@
                 <i class="fa-brands fa-linkedin"></i>
               </a>
               <a
-                href="https://t.me/edilsonmutisse"
+                href="https://wa.me/25878612744"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Telegram"
+                aria-label="WhatsApp"
               >
-                <i class="fa-brands fa-telegram"></i>
+                <i class="fa-brands fa-whatsapp"></i>
               </a>
             </div>
           </div>
         </div>
 
-        <form
-          action="https://formsubmit.co/el/vujetu"
-          method="POST"
-          class="contact-form"
-          id="contact-form"
-        >
-          <!-- Desativa captcha invisível -->
-          <input type="hidden" name="_captcha" value="false" />
-
-          <!-- Usar template em tabela no email -->
-          <input type="hidden" name="_template" value="table" />
-
-          <!-- Página para redirecionar após envio -->
-          <input
-            type="hidden"
-            name="_next"
-            value="https://mutisse.github.io/obrigado.html"
-          />
-
-          <!-- Honeypot para bots -->
-          <input type="text" name="_honey" style="display: none" />
-
+        <form class="contact-form" id="contact-form">
           <div class="input-group">
             <div class="input-box">
               <input
                 type="text"
                 id="name"
-                name="name"
+                name="from_name"
                 placeholder=" "
                 required
               />
@@ -577,7 +562,7 @@
               <input
                 type="email"
                 id="email"
-                name="email"
+                name="from_email"
                 placeholder=" "
                 required
               />
@@ -608,12 +593,13 @@
               id="message"
               name="message"
               placeholder=" "
+              rows="5"
               required
             ></textarea>
             <label for="message">Sua mensagem</label>
           </div>
 
-          <button type="submit" class="btn">
+          <button type="submit" class="btn" id="submit-btn">
             <i class="fa-solid fa-paper-plane"></i> Enviar mensagem
           </button>
         </form>
@@ -669,7 +655,15 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/scrollreveal@4.0.9/dist/scrollreveal.min.js"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
     <script src="./src/js/main.js"></script>
+    <script src="./src/js/email-config.js"></script>
 
     <!-- Preload de imagens críticas -->
     <link rel="preload" href="./assets/img/profiledp.png" as="image" />

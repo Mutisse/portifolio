@@ -3,7 +3,7 @@
  * PORTFÓLIO PROFISSIONAL - EDILSON MUTISSE
  * ===========================================
  * JavaScript otimizado para portfólio
- * Versão: 3.1 (corrigido menu mobile)
+ * Versão: 3.4 (validações visuais corrigidas)
  * Data: Junho 2024
  */
 
@@ -20,8 +20,281 @@ document.addEventListener("DOMContentLoaded", function () {
     cvDownloadBtn: document.querySelector(".btn[download]"),
     typedElement: document.querySelector(".multiple-text"),
     contactForm: document.getElementById("contact-form"),
-    contactSubmitBtn: document.querySelector('#contact-form button[type="submit"]'),
+    contactSubmitBtn: document.querySelector(
+      '#contact-form button[type="submit"]'
+    ),
   };
+
+  /** ==================== FUNÇÕES DE VALIDAÇÃO ==================== */
+
+  /**
+   * Configura o prefixo automático para o telefone
+   */
+  function initPhonePrefix() {
+    const phoneInput = document.getElementById("phone");
+    if (phoneInput) {
+      // Adiciona classe para styling
+      phoneInput.parentElement.classList.add("has-prefix");
+
+      // Cria elemento do prefixo
+      const prefix = document.createElement("span");
+      prefix.className = "prefix";
+      prefix.textContent = "+258";
+      phoneInput.parentElement.appendChild(prefix);
+
+      // Manipulação do input
+      phoneInput.addEventListener("input", function (e) {
+        let value = e.target.value.replace(/\D/g, ""); // Remove não-números
+
+        // Remove o prefixo 258 se o usuário digitar
+        if (value.startsWith("258")) {
+          value = value.substring(3);
+        }
+
+        // Limita a 9 dígitos (78 612 744)
+        if (value.length > 9) {
+          value = value.substring(0, 9);
+        }
+
+        // Formata o número (78 612 744)
+        if (value.length > 0) {
+          value = value.replace(/(\d{2})(\d{3})(\d{3})/, "$1 $2 $3");
+        }
+
+        e.target.value = value;
+
+        // Valida em tempo real
+        validatePhone(this);
+      });
+
+      // Validação ao sair do campo
+      phoneInput.addEventListener("blur", function () {
+        validatePhone(this);
+      });
+    }
+  }
+
+  /**
+   * Validação do telefone
+   */
+  function validatePhone(input) {
+    const value = input.value.replace(/\s/g, "");
+    // Telefone é opcional, mas se preenchido deve ser válido
+    const isValid = value === "" || /^[0-9]{9}$/.test(value);
+
+    updateValidationState(
+      input,
+      isValid,
+      "Telefone deve ter 9 dígitos (ex: 86 123 456)"
+    );
+    return isValid;
+  }
+
+  /**
+   * Validação do nome
+   */
+  function validateName(input) {
+    const value = input.value.trim();
+    const isValid = value.length >= 2 && /^[a-zA-ZÀ-ÿ\s]{2,}$/.test(value);
+
+    updateValidationState(
+      input,
+      isValid,
+      "Nome deve ter pelo menos 2 caracteres (apenas letras)"
+    );
+    return isValid;
+  }
+
+  /**
+   * Validação do email
+   */
+  function validateEmail(input) {
+    const value = input.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isValid = emailRegex.test(value);
+
+    updateValidationState(input, isValid, "Por favor, insira um email válido");
+    return isValid;
+  }
+
+  /**
+   * Validação do assunto
+   */
+  function validateSubject(input) {
+    const value = input.value.trim();
+    const isValid = value.length >= 5;
+
+    updateValidationState(
+      input,
+      isValid,
+      "Assunto deve ter pelo menos 5 caracteres"
+    );
+    return isValid;
+  }
+
+  /**
+   * Validação da mensagem
+   */
+  function validateMessage(input) {
+    const value = input.value.trim();
+    const isValid = value.length >= 10;
+
+    updateValidationState(
+      input,
+      isValid,
+      "Mensagem deve ter pelo menos 10 caracteres"
+    );
+    return isValid;
+  }
+
+  /**
+   * Atualiza o estado visual da validação
+   */
+  function updateValidationState(input, isValid, errorMessage) {
+    const inputBox = input.parentElement;
+    let errorElement = inputBox.querySelector(".error-message");
+
+    // Remove estados anteriores
+    inputBox.classList.remove("success", "error");
+
+    if (input.value.trim() === "") {
+      // Campo vazio - estado neutro
+      if (errorElement) {
+        errorElement.style.display = "none";
+      }
+      return;
+    }
+
+    if (isValid) {
+      // Campo válido - VERDE
+      inputBox.classList.add("success");
+      if (errorElement) {
+        errorElement.style.display = "none";
+      }
+    } else {
+      // Campo inválido - VERMELHO
+      inputBox.classList.add("error");
+
+      // Cria ou atualiza mensagem de erro
+      if (!errorElement) {
+        errorElement = document.createElement("div");
+        errorElement.className = "error-message";
+        inputBox.appendChild(errorElement);
+      }
+      errorElement.textContent = errorMessage;
+      errorElement.style.display = "block";
+    }
+  }
+
+  /**
+   * Configura validações em tempo real para todos os campos
+   */
+  function initFormValidations() {
+    const inputs = {
+      name: document.getElementById("name"),
+      email: document.getElementById("email"),
+      subject: document.getElementById("subject"),
+      message: document.getElementById("message"),
+      phone: document.getElementById("phone"),
+    };
+
+    // Validação em tempo real para cada campo
+    Object.keys(inputs).forEach((field) => {
+      const input = inputs[field];
+      if (input) {
+        // Valida ao digitar (com delay para performance)
+        let timeout;
+        input.addEventListener("input", () => {
+          clearTimeout(timeout);
+          timeout = setTimeout(() => {
+            switch (field) {
+              case "name":
+                validateName(input);
+                break;
+              case "email":
+                validateEmail(input);
+                break;
+              case "subject":
+                validateSubject(input);
+                break;
+              case "message":
+                validateMessage(input);
+                break;
+              case "phone":
+                validatePhone(input);
+                break;
+            }
+          }, 500);
+        });
+
+        // Valida ao sair do campo
+        input.addEventListener("blur", () => {
+          switch (field) {
+            case "name":
+              validateName(input);
+              break;
+            case "email":
+              validateEmail(input);
+              break;
+            case "subject":
+              validateSubject(input);
+              break;
+            case "message":
+              validateMessage(input);
+              break;
+            case "phone":
+              validatePhone(input);
+              break;
+          }
+        });
+      }
+    });
+  }
+
+  /**
+   * Validação completa do formulário antes do envio
+   */
+  function validateForm() {
+    const inputs = {
+      name: document.getElementById("name"),
+      email: document.getElementById("email"),
+      subject: document.getElementById("subject"),
+      message: document.getElementById("message"),
+      phone: document.getElementById("phone"),
+    };
+
+    let isValid = true;
+
+    // Valida campos obrigatórios
+    Object.keys(inputs).forEach((field) => {
+      const input = inputs[field];
+      if (input && field !== "phone") {
+        // Telefone é opcional
+        let fieldValid = false;
+
+        switch (field) {
+          case "name":
+            fieldValid = validateName(input);
+            break;
+          case "email":
+            fieldValid = validateEmail(input);
+            break;
+          case "subject":
+            fieldValid = validateSubject(input);
+            break;
+          case "message":
+            fieldValid = validateMessage(input);
+            break;
+        }
+
+        if (!fieldValid) {
+          isValid = false;
+        }
+      }
+    });
+
+    return isValid;
+  }
 
   /** ==================== FUNÇÕES PRINCIPAIS ==================== */
 
@@ -34,7 +307,8 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.appendChild(overlay);
 
     const toggleMenu = () => {
-      const isExpanded = elements.menuIcon.getAttribute("aria-expanded") === "true";
+      const isExpanded =
+        elements.menuIcon.getAttribute("aria-expanded") === "true";
       elements.menuIcon.setAttribute("aria-expanded", !isExpanded);
       elements.menuIcon.classList.toggle("fa-x");
       elements.navbar.classList.toggle("active");
@@ -92,7 +366,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (scrollPosition >= offset && scrollPosition < offset + height) {
           elements.navLinks.forEach((link) => link.classList.remove("active"));
-          const activeLink = document.querySelector(`header nav a[href*="${id}"]`);
+          const activeLink = document.querySelector(
+            `header nav a[href*="${id}"]`
+          );
           if (activeLink) activeLink.classList.add("active");
         }
       });
@@ -221,7 +497,8 @@ document.addEventListener("DOMContentLoaded", function () {
       elements.cvDownloadBtn.addEventListener("click", function (e) {
         // Adiciona feedback visual
         const originalText = this.innerHTML;
-        this.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Preparando...';
+        this.innerHTML =
+          '<i class="fas fa-circle-notch fa-spin"></i> Preparando...';
 
         // Simula tempo de download (remover em produção)
         setTimeout(() => {
@@ -231,79 +508,6 @@ document.addEventListener("DOMContentLoaded", function () {
           }, 2000);
         }, 1500);
       });
-    }
-  }
-
-  /**
-   * Configura o formulário de contato com validação
-   */
-  function initContactForm() {
-    if (elements.contactForm) {
-      elements.contactForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        // Validação básica
-        const nameInput = this.querySelector('input[name="name"]');
-        const emailInput = this.querySelector('input[name="email"]');
-        const messageInput = this.querySelector('textarea[name="message"]');
-        let isValid = true;
-
-        // Reset de erros
-        this.querySelectorAll(".error").forEach((el) => el.remove());
-
-        // Validação do nome
-        if (!nameInput.value.trim()) {
-          showError(nameInput, "Por favor, insira seu nome");
-          isValid = false;
-        }
-
-        // Validação de email
-        if (!validateEmail(emailInput.value.trim())) {
-          showError(emailInput, "Por favor, insira um email válido");
-          isValid = false;
-        }
-
-        // Validação da mensagem
-        if (!messageInput.value.trim()) {
-          showError(messageInput, "Por favor, escreva sua mensagem");
-          isValid = false;
-        }
-
-        if (isValid) {
-          const originalBtnText = elements.contactSubmitBtn.innerHTML;
-          elements.contactSubmitBtn.disabled = true;
-          elements.contactSubmitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-
-          // Simula envio (substituir por fetch/axios em produção)
-          setTimeout(() => {
-            elements.contactSubmitBtn.innerHTML = '<i class="fas fa-check"></i> Enviado!';
-            this.reset();
-
-            setTimeout(() => {
-              elements.contactSubmitBtn.innerHTML = originalBtnText;
-              elements.contactSubmitBtn.disabled = false;
-            }, 2000);
-          }, 2000);
-        }
-      });
-    }
-
-    // Função auxiliar para mostrar erros
-    function showError(input, message) {
-      const errorElement = document.createElement("small");
-      errorElement.className = "error";
-      errorElement.style.color = "#ff4d4d";
-      errorElement.style.display = "block";
-      errorElement.style.marginTop = "5px";
-      errorElement.textContent = message;
-      input.insertAdjacentElement("afterend", errorElement);
-      input.focus();
-    }
-
-    // Validação de email simples
-    function validateEmail(email) {
-      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return re.test(email);
     }
   }
 
@@ -329,36 +533,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  /**
-   * Inicializa tooltips
-   */
-  function initTooltips() {
-    const tooltipElements = document.querySelectorAll("[data-tooltip]");
-
-    tooltipElements.forEach((el) => {
-      el.addEventListener("mouseenter", showTooltip);
-      el.addEventListener("mouseleave", hideTooltip);
-    });
-
-    function showTooltip(e) {
-      const tooltipText = this.getAttribute("data-tooltip");
-      const tooltip = document.createElement("div");
-      tooltip.className = "tooltip";
-      tooltip.textContent = tooltipText;
-
-      document.body.appendChild(tooltip);
-
-      const rect = this.getBoundingClientRect();
-      tooltip.style.left = `${rect.left + rect.width / 2 - tooltip.offsetWidth / 2}px`;
-      tooltip.style.top = `${rect.top - tooltip.offsetHeight - 10}px`;
-    }
-
-    function hideTooltip() {
-      const tooltip = document.querySelector(".tooltip");
-      if (tooltip) tooltip.remove();
-    }
-  }
-
   /** ==================== INICIALIZAÇÃO DOS MÓDULOS ==================== */
   initMobileMenu();
   handleActiveLinks();
@@ -366,9 +540,9 @@ document.addEventListener("DOMContentLoaded", function () {
   initTypedAnimation();
   initScrollAnimations();
   initCVDownload();
-  initContactForm();
   initObservers();
-  initTooltips();
+  initPhonePrefix();
+  initFormValidations();
 
   // Verificação de carregamento do Typed.js
   window.addEventListener("load", () => {
